@@ -5,7 +5,7 @@ import MainLayout from './layouts/MainLayout';
 import AccountView from './views/account/AccountView';
 import CustomerListView from './views/customer/CustomerListView';
 import DashboardView from './views/reports/DashboardView';
-import LoginView from './views/auth/LoginView';
+import LoginView from './views/auth';
 import NotFoundView from './views/errors/NotFoundView';
 import ProductListView from './views/product/ProductListView';
 import RegisterView from './views/auth/RegisterView';

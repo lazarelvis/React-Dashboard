@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
@@ -12,11 +12,11 @@ import {
   Typography,
   makeStyles
 } from '@material-ui/core';
-import FacebookIcon from '../../icons/Facebook';
-import GoogleIcon from '../../icons/Google';
-import Page from '../../components/Page';
+import FacebookIcon from '../../../icons/Facebook';
+import GoogleIcon from '../../../icons/Google';
+import Page from '../../../components/Page';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: theme.palette.background.dark,
     height: '100%',
@@ -25,10 +25,17 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const LoginView = () => {
+const LoginView = ({ fetchAuthentication, authentication }) => {
   const classes = useStyles();
   const navigate = useNavigate();
 
+  const dateLogin = {
+    strategy: 'local',
+    email: 'lazarelvis15@gmail.com',
+    password: 'galati98'
+  };
+  useEffect(() => {}, []);
+  console.log('autentificare: ', authentication ? authentication : null);
   return (
     <Page className={classes.root} title="Login">
       <Box
@@ -40,18 +47,21 @@ const LoginView = () => {
         <Container maxWidth="sm">
           <Formik
             initialValues={{
-              email: 'demo@devias.io',
-              password: 'Password123'
+              strategy: 'local',
+              email: '',
+              password: ''
             }}
             validationSchema={Yup.object().shape({
               email: Yup.string()
                 .email('Must be a valid email')
                 .max(255)
                 .required('Email is required'),
-              password: Yup.string().max(255).required('Password is required')
+              password: Yup.string()
+                .max(255)
+                .required('Password is required')
             })}
-            onSubmit={() => {
-              navigate('/app/dashboard', { replace: true });
+            onSubmit={values => {
+              fetchAuthentication(values);
             }}
           >
             {({
@@ -59,7 +69,6 @@ const LoginView = () => {
               handleBlur,
               handleChange,
               handleSubmit,
-              isSubmitting,
               touched,
               values
             }) => (
@@ -139,7 +148,6 @@ const LoginView = () => {
                 <Box my={2}>
                   <Button
                     color="primary"
-                    disabled={isSubmitting}
                     fullWidth
                     size="large"
                     type="submit"
