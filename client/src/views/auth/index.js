@@ -1,16 +1,23 @@
-import { fetchAuthenticationUser } from '../../actions/authentication';
+import {
+  fetchAuthenticationUser,
+  fetchAuthUser
+} from '../../actions/authentication';
 import { connect } from 'react-redux';
 import LoginView from './components/LoginView';
 
 const mapStateToProps = state => {
   return {
-    authentication: state.authentication
+    setAuthenticationFailure: state.setAuthenticationFailure,
+    auth: state.auth
   };
 };
 
 const mapDispatchToProps = dispatch => ({
   fetchAuthentication: data => {
     dispatch(fetchAuthenticationUser(data));
+  },
+  fetchAuthUser: () => {
+    dispatch(fetchAuthUser());
   }
 });
 

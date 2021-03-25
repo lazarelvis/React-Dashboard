@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
@@ -15,6 +15,7 @@ import {
 import FacebookIcon from '../../../icons/Facebook';
 import GoogleIcon from '../../../icons/Google';
 import Page from '../../../components/Page';
+import client from '../../../services/api/feathers';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,17 +26,55 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const LoginView = ({ fetchAuthentication, authentication }) => {
+const LoginView = ({
+  fetchAuthentication,
+  setAuthenticationFailure,
+  fetchAuthUser,
+  auth
+}) => {
   const classes = useStyles();
   const navigate = useNavigate();
+  const [loginError, setLoginError] = useState('');
 
-  const dateLogin = {
-    strategy: 'local',
-    email: 'lazarelvis15@gmail.com',
-    password: 'galati98'
-  };
-  useEffect(() => {}, []);
-  console.log('autentificare: ', authentication ? authentication : null);
+  // setAuthenticationFailure
+  //   ? setLoginError('Email or Password is incorrect')
+  //   : null;
+  useEffect(() => {
+    fetchAuthUser();
+  }, []);
+  console.log('authentication wrong pass', setAuthenticationFailure);
+  console.log('auth reAuthntication', auth);
+  // const dateLogin = {
+  //   strategy: 'local',
+  //   email: 'lazarelvis15@gmail.com',
+  //   password: 'galati98'
+  // };
+
+  // const authDeTest = async data => {
+  //   try {
+  //     if (!data) {
+  //       await client.reAuthenticate();
+  //     } else {
+  //       await client.authenticate(data);
+  //     }
+  //     console.log('login success go to dashborad');
+  //     navigate('/app/dashboard');
+  //   } catch (error) {
+  //     console.log('err', error);
+  //     await setError(error);
+  //     console.log('err login state:', errorLogin);
+
+  //     navigate('/login');
+  //   }
+  // };
+
+  // const mainFunc = async () => {
+  //   const userDataTest = await authDeTest();
+  //   console.log('userDataTest: ', userDataTest);
+  // };
+
+  // console.log('autentificare: ', authentication ? authentication : null);
+
   return (
     <Page className={classes.root} title="Login">
       <Box
@@ -60,8 +99,11 @@ const LoginView = ({ fetchAuthentication, authentication }) => {
                 .max(255)
                 .required('Password is required')
             })}
-            onSubmit={values => {
-              fetchAuthentication(values);
+            onSubmit={value => {
+              // authDeTest(value);
+              // mainFunc();
+              // fetchAuthentication(values);
+              fetchAuthentication(value);
             }}
           >
             {({
@@ -145,6 +187,14 @@ const LoginView = ({ fetchAuthentication, authentication }) => {
                   value={values.password}
                   variant="outlined"
                 />
+                {setAuthenticationFailure
+                  ? setLoginError('Email or Password is incorrect')
+                  : setLoginError('')}
+                {loginError && (
+                  <div style={{ color: 'red' }}>
+                    <span>{loginError}</span>
+                  </div>
+                )}
                 <Box my={2}>
                   <Button
                     color="primary"

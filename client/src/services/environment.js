@@ -5,4 +5,4 @@ const mandeGamingApiPort = '3030';
 const mandeGamingApiEndpoint = `${mandeGamingDomain}:${mandeGamingApiPort}`;
 
 export const usersEndpoint = `${mandeGamingApiEndpoint}/users`;
-export const authenticationEndpoint = `${mandeGamingApiEndpoint}/authentication`;
+export const authenticationEndpoint = `${mandeGamingApiEndpoint}`;

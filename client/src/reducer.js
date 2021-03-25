@@ -1,33 +1,19 @@
 import * as t from './actionTypes';
 
 const initialState = {
-  users: [],
-  getUsersSuccess: false,
-  usersFailure: null,
-  getUsersFailure: false,
-
   authentication: [],
   setAuthenticationSuccess: false,
   authenticationFailure: null,
-  setAuthenticationFailure: false
+  setAuthenticationFailure: false,
+
+  auth: [],
+  getAuthSuccess: false,
+  authFailure: null,
+  getAuthFailure: false
 };
 // eslint-disable-next-line
 export default (state = initialState, action) => {
   switch (action.type) {
-    case t.GET_USERS_SUCCESS:
-      return Object.assign({}, state, {
-        users: action.data,
-        getUsersSuccess: true,
-        getUsersFailure: false
-      });
-    case t.GET_USERS_FAILURE:
-      return Object.assign({}, state, {
-        users: null,
-        getUsersSuccess: false,
-        getUsersFailure: true,
-        usersFailure: action.data
-      });
-
     case t.SET_AUTHENTICATION_SUCCESS:
       return Object.assign({}, state, {
         authentication: action.data,
@@ -40,6 +26,20 @@ export default (state = initialState, action) => {
         setAuthenticationSuccess: false,
         setAuthenticationFailure: true,
         authenticationFailure: action.data
+      });
+
+    case t.GET_AUTH_SUCCESS:
+      return Object.assign({}, state, {
+        auth: action.data,
+        getAuthSuccess: true,
+        getAuthFailure: false
+      });
+    case t.GET_AUTH_FAILURE:
+      return Object.assign({}, state, {
+        auth: null,
+        getAuthSuccess: false,
+        getAuthFailure: true,
+        authFailure: action.data
       });
     default:
       return state;
