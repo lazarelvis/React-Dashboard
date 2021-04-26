@@ -3,30 +3,34 @@ import { Navigate } from 'react-router-dom';
 import DashboardLayout from './layouts/DashboardLayout';
 import MainLayout from './layouts/MainLayout';
 import AccountView from './views/account/AccountView';
-import CustomerListView from './views/customer/CustomerListView';
+import InvoiceListView from './views/customer/InvoiceListView';
 import DashboardView from './views/reports/DashboardView';
-import LoginView from './views/auth';
+import LoginView from './views/auth/Login';
 import NotFoundView from './views/errors/NotFoundView';
 import ProductListView from './views/product/ProductListView';
-import RegisterView from './views/auth/RegisterView';
+import RegisterView from './views/auth/Register';
 import SettingsView from './views/settings/SettingsView';
 
-const routes = [
+import Dashboard from './views/dashboard';
+// import Auth from './components/Auth';
+
+const routes = isLoggedIn => [
   {
     path: 'app',
-    element: <DashboardLayout />,
+    element: isLoggedIn ? <DashboardLayout /> : <Navigate to="/login" />,
     children: [
+      { path: 'dashboard', element: <Dashboard /> },
       { path: 'account', element: <AccountView /> },
-      { path: 'customers', element: <CustomerListView /> },
+      { path: 'invoices', element: <InvoiceListView /> },
       { path: 'dashboard', element: <DashboardView /> },
-      { path: 'products', element: <ProductListView /> },
+      { path: 'finance', element: <ProductListView /> },
       { path: 'settings', element: <SettingsView /> },
       { path: '*', element: <Navigate to="/404" /> }
     ]
   },
   {
     path: '/',
-    element: <MainLayout />,
+    element: !isLoggedIn ? <MainLayout /> : <Navigate to="/app/dashboard" />,
     children: [
       { path: 'login', element: <LoginView /> },
       { path: 'register', element: <RegisterView /> },

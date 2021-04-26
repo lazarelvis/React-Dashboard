@@ -1,6 +1,5 @@
 import React from 'react';
-import clsx from 'clsx';
-import PropTypes from 'prop-types';
+import './css/style.css';
 import {
   Avatar,
   Box,
@@ -11,8 +10,8 @@ import {
   colors,
   makeStyles
 } from '@material-ui/core';
-import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
-import MoneyIcon from '@material-ui/icons/Money';
+import DescriptionIcon from '@material-ui/icons/Description';
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -23,40 +22,47 @@ const useStyles = makeStyles(theme => ({
     height: 56,
     width: 56
   },
-  differenceIcon: {
-    color: colors.red[900]
-  },
   differenceValue: {
-    color: colors.red[900],
+    color: colors.green[500],
+    marginRight: theme.spacing(1)
+  },
+  differenceIcon: {
+    color: colors.green[900]
+  },
+  differencePercent: {
+    color: colors.green[900],
     marginRight: theme.spacing(1)
   }
 }));
-
-const Budget = ({ className, ...rest }) => {
+const InvoicesIssued = () => {
   const classes = useStyles();
 
   return (
-    <Card className={clsx(classes.root, className)} {...rest}>
+    <Card>
       <CardContent>
         <Grid container justify="space-between" spacing={3}>
           <Grid item>
             <Typography color="textSecondary" gutterBottom variant="h6">
-              BUDGET
+              INVOICES ISSUED
             </Typography>
-            <Typography color="textPrimary" variant="h3">
-              $24,000
+            <Typography
+              className={classes.differenceValue}
+              color="textPrimary"
+              variant="h3"
+            >
+              0 Lei
             </Typography>
           </Grid>
           <Grid item>
             <Avatar className={classes.avatar}>
-              <MoneyIcon />
+              <DescriptionIcon />
             </Avatar>
           </Grid>
         </Grid>
         <Box mt={2} display="flex" alignItems="center">
-          <ArrowDownwardIcon className={classes.differenceIcon} />
-          <Typography className={classes.differenceValue} variant="body2">
-            12%
+          <ArrowUpwardIcon className={classes.differenceIcon} />
+          <Typography variant="body2" className={classes.differencePercent}>
+            0%
           </Typography>
           <Typography color="textSecondary" variant="caption">
             Since last month
@@ -67,8 +73,4 @@ const Budget = ({ className, ...rest }) => {
   );
 };
 
-Budget.propTypes = {
-  className: PropTypes.string
-};
-
-export default Budget;
+export default InvoicesIssued;

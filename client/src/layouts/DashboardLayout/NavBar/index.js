@@ -22,12 +22,7 @@ import {
   Users as UsersIcon
 } from 'react-feather';
 import NavItem from './NavItem';
-
-const user = {
-  avatar: '/static/images/avatars/avatar_6.png',
-  jobTitle: 'Senior Developer',
-  name: 'Katarina Smith'
-};
+import { useSelector } from 'react-redux';
 
 const items = [
   {
@@ -36,14 +31,14 @@ const items = [
     title: 'Dashboard'
   },
   {
-    href: '/app/customers',
+    href: '/app/invoices',
     icon: UsersIcon,
-    title: 'Customers'
+    title: 'Invoices'
   },
   {
-    href: '/app/products',
+    href: '/app/finance',
     icon: ShoppingBagIcon,
-    title: 'Products'
+    title: 'Finances'
   },
   {
     href: '/app/account',
@@ -92,6 +87,8 @@ const NavBar = ({ onMobileClose, openMobile }) => {
   const classes = useStyles();
   const location = useLocation();
 
+  const userData = useSelector(state => state.auth);
+  console.log('userData prof:', userData.user.avatar);
   useEffect(() => {
     if (openMobile && onMobileClose) {
       onMobileClose();
@@ -100,41 +97,25 @@ const NavBar = ({ onMobileClose, openMobile }) => {
   }, [location.pathname]);
 
   const content = (
-    <Box
-      height="100%"
-      display="flex"
-      flexDirection="column"
-    >
-      <Box
-        alignItems="center"
-        display="flex"
-        flexDirection="column"
-        p={2}
-      >
+    <Box height="100%" display="flex" flexDirection="column">
+      <Box alignItems="center" display="flex" flexDirection="column" p={2}>
         <Avatar
           className={classes.avatar}
           component={RouterLink}
-          src={user.avatar}
+          src={userData.user.avatar}
           to="/app/account"
         />
-        <Typography
-          className={classes.name}
-          color="textPrimary"
-          variant="h5"
-        >
-          {user.name}
+        <Typography className={classes.name} color="textPrimary" variant="h5">
+          {userData.user.firstname} {userData.user.lastname}
         </Typography>
-        <Typography
-          color="textSecondary"
-          variant="body2"
-        >
-          {user.jobTitle}
+        <Typography color="textSecondary" variant="body2">
+          {userData.user.email}
         </Typography>
       </Box>
       <Divider />
       <Box p={2}>
         <List>
-          {items.map((item) => (
+          {items.map(item => (
             <NavItem
               href={item.href}
               key={item.title}
@@ -145,7 +126,6 @@ const NavBar = ({ onMobileClose, openMobile }) => {
         </List>
       </Box>
       <Box flexGrow={1} />
-    
     </Box>
   );
 

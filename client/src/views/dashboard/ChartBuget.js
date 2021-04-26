@@ -20,7 +20,7 @@ const useStyles = makeStyles(() => ({
   root: {}
 }));
 
-const Sales = ({ className, ...rest }) => {
+const ChartBuget = ({ className, ...rest }) => {
   const classes = useStyles();
   const theme = useTheme();
 
@@ -103,7 +103,7 @@ const Sales = ({ className, ...rest }) => {
             Last 7 days
           </Button>
         }
-        title="Latest Sales"
+        title="Chart Budget"
       />
       <Divider />
       <CardContent>
@@ -126,8 +126,8 @@ const Sales = ({ className, ...rest }) => {
   );
 };
 
-Sales.propTypes = {
+ChartBuget.propTypes = {
   className: PropTypes.string
 };
 
-export default Sales;
+export default ChartBuget;

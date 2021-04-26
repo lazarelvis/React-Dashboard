@@ -13,9 +13,9 @@ import {
   Typography,
   makeStyles
 } from '@material-ui/core';
-import Page from '../../components/Page';
+import Page from '../../../../components/Page';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: theme.palette.background.dark,
     height: '100%',
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const RegisterView = () => {
+const RegisterView = ({ registerUser }) => {
   const classes = useStyles();
   const navigate = useNavigate();
 
@@ -53,12 +53,18 @@ const RegisterView = () => {
               firstName: Yup.string()
                 .max(255)
                 .required('First name is required'),
-              lastName: Yup.string().max(255).required('Last name is required'),
-              password: Yup.string().max(255).required('password is required'),
+              lastName: Yup.string()
+                .max(255)
+                .required('Last name is required'),
+              password: Yup.string()
+                .max(255)
+                .required('password is required'),
               policy: Yup.boolean().oneOf([true], 'This field must be checked')
             })}
-            onSubmit={() => {
-              navigate('/app/dashboard', { replace: true });
+            onSubmit={value => {
+              delete value.policy;
+              console.log('value submit regsiter: ', value);
+              // navigate('/app/dashboard', { replace: true });
             }}
           >
             {({
@@ -66,7 +72,7 @@ const RegisterView = () => {
               handleBlur,
               handleChange,
               handleSubmit,
-              isSubmitting,
+              // isSubmitting,
               touched,
               values
             }) => (
@@ -158,7 +164,7 @@ const RegisterView = () => {
                 <Box my={2}>
                   <Button
                     color="primary"
-                    disabled={isSubmitting}
+                    // disabled={isSubmitting}
                     fullWidth
                     size="large"
                     type="submit"

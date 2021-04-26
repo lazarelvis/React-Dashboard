@@ -1,28 +1,28 @@
-// import * as t from '../actionTypes';
-// import usersServiceApi from '../services/users';
+import * as t from '../actionTypes';
+import usersServiceApi from '../services/users';
 
-// //get users
-// function receiveUsers(json) {
-//   return {
-//     type: t.GET_USERS_SUCCESS,
-//     data: json
-//   };
-// }
+//get users
+function sendUser(json) {
+  return {
+    type: t.SET_REGISTER_SUCCESS,
+    data: json
+  };
+}
 
-// function receiveUsersError(error) {
-//   return {
-//     type: t.GET_USERS_FAILURE,
-//     error
-//   };
-// }
+function sendUserError(error) {
+  return {
+    type: t.SET_REGISTER_FAILURE,
+    error
+  };
+}
 
-// export const fetchAllUsers = () => (dispatch, getState) => {
-//   return usersServiceApi
-//     .fetchAll()
-//     .then(json => {
-//       dispatch(receiveUsers(json));
-//     })
-//     .catch(error => {
-//       dispatch(receiveUsersError(error));
-//     });
-// };
+export const registerUser = data => (dispatch, getState) => {
+  return usersServiceApi
+    .create(data)
+    .then(json => {
+      dispatch(sendUser(json));
+    })
+    .catch(error => {
+      dispatch(sendUserError(error));
+    });
+};

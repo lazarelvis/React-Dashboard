@@ -9,7 +9,12 @@ const initialState = {
   auth: [],
   getAuthSuccess: false,
   authFailure: null,
-  getAuthFailure: false
+  getAuthFailure: false,
+
+  register: [],
+  setRegisterSuccess: false,
+  registerFailure: null,
+  setRegisterFailure: false
 };
 // eslint-disable-next-line
 export default (state = initialState, action) => {
@@ -40,6 +45,20 @@ export default (state = initialState, action) => {
         getAuthSuccess: false,
         getAuthFailure: true,
         authFailure: action.data
+      });
+
+    case t.SET_REGISTER_SUCCESS:
+      return Object.assign({}, state, {
+        register: action.data,
+        setRegisterSuccess: true,
+        setRegisterFailure: false
+      });
+    case t.SET_REGISTER_FAILURE:
+      return Object.assign({}, state, {
+        register: null,
+        setRegisterSuccess: false,
+        setRegisterFailure: true,
+        registerFailure: action.data
       });
     default:
       return state;

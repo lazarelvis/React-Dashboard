@@ -5,7 +5,7 @@ import Results from './Results';
 import Toolbar from './Toolbar';
 import data from './data';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: theme.palette.background.dark,
     minHeight: '100%',
@@ -14,20 +14,20 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const CustomerListView = () => {
+const InvoiceListView = () => {
   const classes = useStyles();
-  const [customers] = useState(data);
+  const [invoices] = useState(data);
 
   return (
-    <Page className={classes.root} title="Customers">
+    <Page className={classes.root} title="Invoices">
       <Container maxWidth={false}>
         <Toolbar />
         <Box mt={3}>
-          <Results customers={customers} />
+          <Results invoices={invoices} />
         </Box>
       </Container>
     </Page>
   );
 };
 
-export default CustomerListView;
+export default InvoiceListView;

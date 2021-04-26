@@ -7,56 +7,59 @@ import {
   Card,
   CardContent,
   Grid,
+  LinearProgress,
   Typography,
-  colors,
-  makeStyles
+  makeStyles,
+  colors
 } from '@material-ui/core';
+import InsertChartIcon from '@material-ui/icons/InsertChartOutlined';
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
-import MoneyIcon from '@material-ui/icons/Money';
 
 const useStyles = makeStyles(theme => ({
   root: {
     height: '100%'
   },
   avatar: {
-    backgroundColor: colors.red[600],
+    backgroundColor: colors.orange[600],
     height: 56,
     width: 56
   },
-  differenceIcon: {
-    color: colors.red[900]
-  },
   differenceValue: {
-    color: colors.red[900],
+    color: colors.green[500],
     marginRight: theme.spacing(1)
   }
 }));
 
-const Budget = ({ className, ...rest }) => {
+const TotalExpenses = () => {
   const classes = useStyles();
 
   return (
-    <Card className={clsx(classes.root, className)} {...rest}>
+    <Card className={clsx(classes.root)}>
       <CardContent>
         <Grid container justify="space-between" spacing={3}>
           <Grid item>
             <Typography color="textSecondary" gutterBottom variant="h6">
-              BUDGET
+              TOTAL EXPENSES
             </Typography>
-            <Typography color="textPrimary" variant="h3">
-              $24,000
+            <Typography
+              className={classes.differenceValue}
+              color="textPrimary"
+              variant="h3"
+            >
+              0 Lei
             </Typography>
           </Grid>
           <Grid item>
             <Avatar className={classes.avatar}>
-              <MoneyIcon />
+              <InsertChartIcon />
             </Avatar>
           </Grid>
         </Grid>
         <Box mt={2} display="flex" alignItems="center">
           <ArrowDownwardIcon className={classes.differenceIcon} />
-          <Typography className={classes.differenceValue} variant="body2">
-            12%
+          <Typography variant="body2" className={classes.differencePercent}>
+            0%
           </Typography>
           <Typography color="textSecondary" variant="caption">
             Since last month
@@ -67,8 +70,4 @@ const Budget = ({ className, ...rest }) => {
   );
 };
 
-Budget.propTypes = {
-  className: PropTypes.string
-};
-
-export default Budget;
+export default TotalExpenses;

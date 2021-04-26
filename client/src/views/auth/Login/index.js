@@ -1,7 +1,7 @@
 import {
   fetchAuthenticationUser,
   fetchAuthUser
-} from '../../actions/authentication';
+} from '../../../actions/authentication';
 import { connect } from 'react-redux';
 import LoginView from './components/LoginView';
 

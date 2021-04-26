@@ -12,10 +12,10 @@ import {
   Typography,
   makeStyles
 } from '@material-ui/core';
-import FacebookIcon from '../../../icons/Facebook';
-import GoogleIcon from '../../../icons/Google';
-import Page from '../../../components/Page';
-import client from '../../../services/api/feathers';
+import FacebookIcon from '../../../../icons/Facebook';
+import GoogleIcon from '../../../../icons/Google';
+import Page from '../../../../components/Page';
+import client from '../../../../services/api/feathers';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -104,6 +104,7 @@ const LoginView = ({
               // mainFunc();
               // fetchAuthentication(values);
               fetchAuthentication(value);
+              navigate('/login');
             }}
           >
             {({
@@ -187,14 +188,14 @@ const LoginView = ({
                   value={values.password}
                   variant="outlined"
                 />
-                {setAuthenticationFailure
+                {/* {setAuthenticationFailure
                   ? setLoginError('Email or Password is incorrect')
                   : setLoginError('')}
                 {loginError && (
                   <div style={{ color: 'red' }}>
                     <span>{loginError}</span>
                   </div>
-                )}
+                )} */}
                 <Box my={2}>
                   <Button
                     color="primary"

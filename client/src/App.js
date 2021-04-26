@@ -6,9 +6,12 @@ import GlobalStyles from './components/GlobalStyles';
 import './mixins/chartjs';
 import theme from './theme';
 import routes from './routes';
+import { useSelector } from 'react-redux';
 
 const App = () => {
-  const routing = useRoutes(routes);
+  const getAuthSuccess = useSelector(state => state.getAuthSuccess);
+  console.log('sal din routes', getAuthSuccess);
+  const routing = useRoutes(routes(getAuthSuccess));
 
   return (
     <ThemeProvider theme={theme}>

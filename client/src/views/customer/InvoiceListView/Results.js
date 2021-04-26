@@ -8,6 +8,7 @@ import {
   Box,
   Card,
   Checkbox,
+  Chip,
   Table,
   TableBody,
   TableCell,
@@ -19,59 +20,59 @@ import {
 } from '@material-ui/core';
 import getInitials from '../../../utils/getInitials';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {},
   avatar: {
     marginRight: theme.spacing(2)
   }
 }));
 
-const Results = ({ className, customers, ...rest }) => {
+const Results = ({ className, invoices, ...rest }) => {
   const classes = useStyles();
-  const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
+  const [selectedInvoicesIds, setSelectedInvoicesIds] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
 
-  const handleSelectAll = (event) => {
-    let newSelectedCustomerIds;
+  const handleSelectAll = event => {
+    let newSelectedInvoicesIds;
 
     if (event.target.checked) {
-      newSelectedCustomerIds = customers.map((customer) => customer.id);
+      newSelectedInvoicesIds = invoices.map(invoice => invoice.id);
     } else {
-      newSelectedCustomerIds = [];
+      newSelectedInvoicesIds = [];
     }
 
-    setSelectedCustomerIds(newSelectedCustomerIds);
+    setSelectedInvoicesIds(newSelectedInvoicesIds);
   };
 
   const handleSelectOne = (event, id) => {
-    const selectedIndex = selectedCustomerIds.indexOf(id);
-    let newSelectedCustomerIds = [];
+    const selectedIndex = selectedInvoicesIds.indexOf(id);
+    let newSelectedInvoicesIds = [];
 
     if (selectedIndex === -1) {
-      newSelectedCustomerIds = newSelectedCustomerIds.concat(
-        selectedCustomerIds,
+      newSelectedInvoicesIds = newSelectedInvoicesIds.concat(
+        setSelectedInvoicesIds,
         id
       );
     } else if (selectedIndex === 0) {
-      newSelectedCustomerIds = newSelectedCustomerIds.concat(
-        selectedCustomerIds.slice(1)
+      newSelectedInvoicesIds = newSelectedInvoicesIds.concat(
+        setSelectedInvoicesIds.slice(1)
       );
-    } else if (selectedIndex === selectedCustomerIds.length - 1) {
-      newSelectedCustomerIds = newSelectedCustomerIds.concat(
-        selectedCustomerIds.slice(0, -1)
+    } else if (selectedIndex === selectedInvoicesIds.length - 1) {
+      newSelectedInvoicesIds = newSelectedInvoicesIds.concat(
+        setSelectedInvoicesIds.slice(0, -1)
       );
     } else if (selectedIndex > 0) {
-      newSelectedCustomerIds = newSelectedCustomerIds.concat(
-        selectedCustomerIds.slice(0, selectedIndex),
-        selectedCustomerIds.slice(selectedIndex + 1)
+      newSelectedInvoicesIds = newSelectedInvoicesIds.concat(
+        setSelectedInvoicesIds.slice(0, selectedIndex),
+        setSelectedInvoicesIds.slice(selectedIndex + 1)
       );
     }
 
-    setSelectedCustomerIds(newSelectedCustomerIds);
+    setSelectedInvoicesIds(newSelectedInvoicesIds);
   };
 
-  const handleLimitChange = (event) => {
+  const handleLimitChange = event => {
     setLimit(event.target.value);
   };
 
@@ -88,33 +89,35 @@ const Results = ({ className, customers, ...rest }) => {
               <TableRow>
                 <TableCell padding="checkbox">
                   <Checkbox
-                    checked={selectedCustomerIds.length === customers.length}
+                    checked={selectedInvoicesIds.length === invoices.length}
                     color="primary"
                     indeterminate={
-                      selectedCustomerIds.length > 0 &&
-                      selectedCustomerIds.length < customers.length
+                      selectedInvoicesIds.length > 0 &&
+                      selectedInvoicesIds.length < invoices.length
                     }
                     onChange={handleSelectAll}
                   />
                 </TableCell>
-                <TableCell>Name</TableCell>
-                <TableCell>Email</TableCell>
-                <TableCell>Location</TableCell>
-                <TableCell>Phone</TableCell>
-                <TableCell>Registration date</TableCell>
+                <TableCell>Provider</TableCell>
+                <TableCell>Invoice Amount</TableCell>
+                <TableCell>Net Amount</TableCell>
+                <TableCell>Invoice ID</TableCell>
+                <TableCell>Date Created</TableCell>
+                <TableCell>Status</TableCell>
+                <TableCell>Optional</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {customers.slice(0, limit).map((customer) => (
+              {invoices.slice(0, limit).map(invoice => (
                 <TableRow
                   hover
-                  key={customer.id}
-                  selected={selectedCustomerIds.indexOf(customer.id) !== -1}
+                  key={invoice.id}
+                  selected={selectedInvoicesIds.indexOf(invoice.id) !== -1}
                 >
                   <TableCell padding="checkbox">
                     <Checkbox
-                      checked={selectedCustomerIds.indexOf(customer.id) !== -1}
-                      onChange={(event) => handleSelectOne(event, customer.id)}
+                      checked={selectedInvoicesIds.indexOf(invoice.id) !== -1}
+                      onChange={event => handleSelectOne(event, invoice.id)}
                       value="true"
                     />
                   </TableCell>
@@ -122,23 +125,25 @@ const Results = ({ className, customers, ...rest }) => {
                     <Box alignItems="center" display="flex">
                       <Avatar
                         className={classes.avatar}
-                        src={customer.avatarUrl}
+                        src={invoice.avatarUrl}
                       >
-                        {getInitials(customer.name)}
+                        {getInitials(invoice.provider)}
                       </Avatar>
                       <Typography color="textPrimary" variant="body1">
-                        {customer.name}
+                        {invoice.provider}
                       </Typography>
                     </Box>
                   </TableCell>
-                  <TableCell>{customer.email}</TableCell>
+                  <TableCell>{invoice.amount}</TableCell>
+                  <TableCell>{invoice.net}</TableCell>
+                  <TableCell>{invoice.barcode}</TableCell>
                   <TableCell>
-                    {`${customer.address.city}, ${customer.address.state}, ${customer.address.country}`}
+                    {moment(invoice.createdAt).format('DD/MM/YYYY')}
                   </TableCell>
-                  <TableCell>{customer.phone}</TableCell>
                   <TableCell>
-                    {moment(customer.createdAt).format('DD/MM/YYYY')}
+                    <Chip color="primary" label={invoice.status} size="small" />
                   </TableCell>
+                  <TableCell>{invoice.optional}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -147,7 +152,7 @@ const Results = ({ className, customers, ...rest }) => {
       </PerfectScrollbar>
       <TablePagination
         component="div"
-        count={customers.length}
+        count={invoices.length}
         onChangePage={handlePageChange}
         onChangeRowsPerPage={handleLimitChange}
         page={page}
@@ -160,7 +165,7 @@ const Results = ({ className, customers, ...rest }) => {
 
 Results.propTypes = {
   className: PropTypes.string,
-  customers: PropTypes.array.isRequired
+  invoices: PropTypes.array.isRequired
 };
 
 export default Results;
