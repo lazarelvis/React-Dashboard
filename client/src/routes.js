@@ -10,6 +10,7 @@ import NotFoundView from './views/errors/NotFoundView';
 import ProductListView from './views/product/ProductListView';
 import RegisterView from './views/auth/Register';
 import SettingsView from './views/settings/SettingsView';
+import BudgetCalcualtor from './views/calculator';
 
 import Dashboard from './views/dashboard';
 // import Auth from './components/Auth';
@@ -24,6 +25,7 @@ const routes = isLoggedIn => [
       { path: 'invoices', element: <InvoiceListView /> },
       { path: 'dashboard', element: <DashboardView /> },
       { path: 'finance', element: <ProductListView /> },
+      { path: 'budget-calculator', element: <BudgetCalcualtor /> },
       { path: 'settings', element: <SettingsView /> },
       { path: '*', element: <Navigate to="/404" /> }
     ]

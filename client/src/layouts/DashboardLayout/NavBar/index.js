@@ -19,7 +19,8 @@ import {
   ShoppingBag as ShoppingBagIcon,
   User as UserIcon,
   UserPlus as UserPlusIcon,
-  Users as UsersIcon
+  Users as UsersIcon,
+  Grid
 } from 'react-feather';
 import NavItem from './NavItem';
 import { useSelector } from 'react-redux';
@@ -39,6 +40,11 @@ const items = [
     href: '/app/finance',
     icon: ShoppingBagIcon,
     title: 'Finances'
+  },
+  {
+    href: '/app/budget-calculator',
+    icon: Grid,
+    title: 'Budget Calculator'
   },
   {
     href: '/app/account',
