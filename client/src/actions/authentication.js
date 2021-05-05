@@ -53,3 +53,7 @@ export const fetchAuthUser = () => (dispatch, getState) => {
       dispatch(receiveAuthError(error));
     });
 };
+
+export const logOutUser = () => {
+  client.logout();
+};
