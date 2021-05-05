@@ -43,17 +43,18 @@ class HelloWorld extends React.Component {
   render() {
     return (
       <div>
-        <h1>{this.props.title}</h1>
-
         {!this.state.bShowScanner ? (
           <div>
             {/* Choose image(s) to decode:
                         <input onChange={this.onIptChange} type="file" multiple accept="image/png,image/jpeg,image/bmp,image/gif" />
                         <br/><br/> */}
-            <Button onClick={this.showScanner}>
-              <BiBarcodeReader />
-              Click to scan
-            </Button>
+            <div className="scan-btn">
+              <Button onClick={this.showScanner}>
+                <BiBarcodeReader style={{ fontSize: '60px' }} />
+                Click to scan
+              </Button>
+            </div>
+
             {/* <button onClick={this.showScanner}>show scanner</button> */}
           </div>
         ) : (

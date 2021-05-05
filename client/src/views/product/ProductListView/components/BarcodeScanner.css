@@ -87,3 +87,14 @@
     top: 97%;
   }
 }
+
+/* style button 'click to scan' */
+.scan-btn {
+  text-align: center;
+  padding-bottom: 24px;
+}
+.scan-btn .MuiButton-label {
+  font-size: 35px;
+  display: flex;
+  flex-direction: column;
+}
