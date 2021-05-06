@@ -15,7 +15,6 @@ import {
 import FacebookIcon from '../../../../icons/Facebook';
 import GoogleIcon from '../../../../icons/Google';
 import Page from '../../../../components/Page';
-import client from '../../../../services/api/feathers';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -30,7 +29,8 @@ const LoginView = ({
   fetchAuthentication,
   setAuthenticationFailure,
   fetchAuthUser,
-  auth
+  auth,
+  setAuthenticationSuccess
 }) => {
   const classes = useStyles();
   const navigate = useNavigate();
@@ -42,8 +42,10 @@ const LoginView = ({
   useEffect(() => {
     fetchAuthUser();
   }, []);
-  console.log('authentication wrong pass', setAuthenticationFailure);
-  console.log('auth reAuthntication', auth);
+
+  if (setAuthenticationSuccess) {
+    navigate('/app/dashboard');
+  }
   // const dateLogin = {
   //   strategy: 'local',
   //   email: 'lazarelvis15@gmail.com',

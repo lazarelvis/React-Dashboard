@@ -8,6 +8,7 @@ import LoginView from './components/LoginView';
 const mapStateToProps = state => {
   return {
     setAuthenticationFailure: state.setAuthenticationFailure,
+    setAuthenticationSuccess: state.setAuthenticationSuccess,
     auth: state.auth
   };
 };
