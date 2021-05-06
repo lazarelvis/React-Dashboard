@@ -31,7 +31,6 @@ const TopBar = ({ className, onMobileNavOpen, ...rest }) => {
 
   const showMsg = () => {
     logOutUser();
-    console.log('log ou apasat');
   };
 
   return (
