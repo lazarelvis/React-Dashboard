@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux';
 
 const App = () => {
   const getAuthSuccess = useSelector(state => state.getAuthSuccess);
-  console.log('sal din routes', getAuthSuccess);
+  // console.log('din routes', getAuthSuccess);
   const routing = useRoutes(routes(getAuthSuccess));
 
   return (

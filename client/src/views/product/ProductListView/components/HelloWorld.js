@@ -40,6 +40,11 @@ class HelloWorld extends React.Component {
       this.reader.destroy();
     }
   }
+
+  sendEmail = () => {
+    console.log('se trimite emailul');
+  };
+
   render() {
     return (
       <div>
@@ -49,7 +54,11 @@ class HelloWorld extends React.Component {
                         <input onChange={this.onIptChange} type="file" multiple accept="image/png,image/jpeg,image/bmp,image/gif" />
                         <br/><br/> */}
             <div className="scan-btn">
-              <Button onClick={this.showScanner}>
+              {/* <Button onClick={this.showScanner}>
+                <BiBarcodeReader style={{ fontSize: '60px' }} />
+                Click to scan
+              </Button> */}
+              <Button onClick={this.sendEmail}>
                 <BiBarcodeReader style={{ fontSize: '60px' }} />
                 Click to scan
               </Button>

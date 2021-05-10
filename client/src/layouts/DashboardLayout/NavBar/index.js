@@ -94,7 +94,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
   const location = useLocation();
 
   const userData = useSelector(state => state.auth);
-  console.log('userData prof:', userData.user.avatar);
+  // console.log('userData prof:', userData.user.avatar);
   useEffect(() => {
     if (openMobile && onMobileClose) {
       onMobileClose();
