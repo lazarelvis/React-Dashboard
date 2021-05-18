@@ -7,7 +7,7 @@ import InvoiceListView from './views/customer/InvoiceListView';
 import DashboardView from './views/reports/DashboardView';
 import LoginView from './views/auth/Login';
 import NotFoundView from './views/errors/NotFoundView';
-import ProductListView from './views/product/ProductListView';
+import ProductListView from './views/product';
 import RegisterView from './views/auth/Register';
 import SettingsView from './views/settings/SettingsView';
 import BudgetCalcualtor from './views/calculator';

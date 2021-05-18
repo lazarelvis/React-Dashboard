@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import {
   Avatar,
   Box,
+  Button,
   Card,
   CardContent,
   Divider,
@@ -13,6 +14,8 @@ import {
 } from '@material-ui/core';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import GetAppIcon from '@material-ui/icons/GetApp';
+import { BiBarcodeReader } from 'react-icons/bi';
+import product from '..';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,17 +28,36 @@ const useStyles = makeStyles(theme => ({
   },
   statsIcon: {
     marginRight: theme.spacing(1)
+  },
+  imageSize: {
+    width: '70px',
+    height: '70px'
   }
 }));
 
-const ProductCard = ({ className, product, ...rest }) => {
+const ProductCard = ({ className, product, sendEmail, authData, ...rest }) => {
   const classes = useStyles();
+
+  const obj = {
+    _id: authData._id,
+    email: authData.email,
+    product: ''
+  };
+  const sendEmailFunc = prod => {
+    obj.product = prod;
+    sendEmail(obj);
+  };
 
   return (
     <Card className={clsx(classes.root, className)} {...rest}>
       <CardContent>
         <Box display="flex" justifyContent="end" mb={3}>
-          <Avatar alt="Product" src={product.media} variant="square" />
+          <Avatar
+            className={classes.imageSize}
+            alt="Product"
+            src={product.media}
+            variant="square"
+          />
         </Box>
         <Typography align="left" color="textPrimary" gutterBottom variant="h4">
           {product.title}
@@ -55,10 +77,10 @@ const ProductCard = ({ className, product, ...rest }) => {
             </Typography>
           </Grid>
           <Grid className={classes.statsItem} item>
-            <GetAppIcon className={classes.statsIcon} color="action" />
-            <Typography color="textSecondary" display="inline" variant="body2">
-              {product.totalDownloads} Downloads
-            </Typography>
+            <Button onClick={() => sendEmailFunc(product.title)}>
+              <BiBarcodeReader />
+              Click to scan
+            </Button>
           </Grid>
         </Grid>
       </Box>

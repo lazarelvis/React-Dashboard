@@ -5,10 +5,7 @@
     "entity": "user",
     "service": "users",
     "secret": "z+rUKYGoKiU+CWHWZ1mXQQuRWUw=",
-    "authStrategies": [
-      "jwt",
-      "local"
-    ],
+    "authStrategies": ["jwt", "local"],
     "jwtOptions": {
       "header": {
         "typ": "access"
@@ -23,5 +20,5 @@
       "passwordField": "password"
     }
   },
-  "mongodb": "mongodb://localhost:27017/dashboard_react"
+  "mongodb": "mongodb+srv://lazarelvis1:galati98@react-barcode.dg2yk.mongodb.net/barcodeData?retryWrites=true&w=majority"
 }

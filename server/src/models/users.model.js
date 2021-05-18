@@ -12,7 +12,7 @@ module.exports = function (app) {
       email: { type: String, unique: true, lowercase: true },
       password: { type: String },
       avatar: { type: String },
-      info: { type: Array, default: [] },
+      data: { type: Array, default: [] },
     },
     {
       timestamps: true,

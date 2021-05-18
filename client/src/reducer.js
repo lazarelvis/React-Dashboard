@@ -14,7 +14,12 @@ const initialState = {
   register: [],
   setRegisterSuccess: false,
   registerFailure: null,
-  setRegisterFailure: false
+  setRegisterFailure: false,
+
+  email: [],
+  sendEmailSuccess: false,
+  sendEmailFailure: false,
+  emailFailure: null
 };
 // eslint-disable-next-line
 export default (state = initialState, action) => {
@@ -31,6 +36,20 @@ export default (state = initialState, action) => {
         setAuthenticationSuccess: false,
         setAuthenticationFailure: true,
         authenticationFailure: action.data
+      });
+
+    case t.SEND_EMAIL_SUCCESS:
+      return Object.assign({}, state, {
+        email: action.data,
+        sendEmailSuccess: true,
+        sendEmailFailure: false
+      });
+    case t.SEND_EMAIL_FAILURE:
+      return Object.assign({}, state, {
+        email: null,
+        sendEmailSuccess: false,
+        sendEmailFailure: true,
+        emailFailure: action.data
       });
 
     case t.GET_AUTH_SUCCESS:
