@@ -99,11 +99,12 @@ const Results = ({ className, invoices, ...rest }) => {
                   />
                 </TableCell>
                 <TableCell>Provider</TableCell>
-                <TableCell>Invoice Amount</TableCell>
-                <TableCell>Net Amount</TableCell>
                 <TableCell>Invoice ID</TableCell>
+                <TableCell>Client code</TableCell>
+                <TableCell>Invoice Amount</TableCell>
                 <TableCell>Date Created</TableCell>
                 <TableCell>Status</TableCell>
+                <TableCell>Invoice Number</TableCell>
                 <TableCell>Optional</TableCell>
               </TableRow>
             </TableHead>
@@ -111,13 +112,13 @@ const Results = ({ className, invoices, ...rest }) => {
               {invoices.slice(0, limit).map(invoice => (
                 <TableRow
                   hover
-                  key={invoice.id}
-                  selected={selectedInvoicesIds.indexOf(invoice.id) !== -1}
+                  key={invoice.code}
+                  selected={selectedInvoicesIds.indexOf(invoice.name) !== -1}
                 >
                   <TableCell padding="checkbox">
                     <Checkbox
-                      checked={selectedInvoicesIds.indexOf(invoice.id) !== -1}
-                      onChange={event => handleSelectOne(event, invoice.id)}
+                      checked={selectedInvoicesIds.indexOf(invoice.name) !== -1}
+                      onChange={event => handleSelectOne(event, invoice.name)}
                       value="true"
                     />
                   </TableCell>
@@ -127,22 +128,23 @@ const Results = ({ className, invoices, ...rest }) => {
                         className={classes.avatar}
                         src={invoice.avatarUrl}
                       >
-                        {getInitials(invoice.provider)}
+                        {getInitials(invoice.name)}
                       </Avatar>
                       <Typography color="textPrimary" variant="body1">
-                        {invoice.provider}
+                        {invoice.name}
                       </Typography>
                     </Box>
                   </TableCell>
-                  <TableCell>{invoice.amount}</TableCell>
-                  <TableCell>{invoice.net}</TableCell>
-                  <TableCell>{invoice.barcode}</TableCell>
-                  <TableCell>
-                    {moment(invoice.createdAt).format('DD/MM/YYYY')}
+                  <TableCell>{invoice.code}</TableCell>
+                  <TableCell style={{ textAlign: 'center' }}>
+                    {invoice.clientCode ? invoice.clientCode : '-'}
                   </TableCell>
+                  <TableCell>{invoice.amount}</TableCell>
+                  <TableCell>{invoice.createdAt}</TableCell>
                   <TableCell>
                     <Chip color="primary" label={invoice.status} size="small" />
                   </TableCell>
+                  <TableCell>{invoice.invoiceNumber}</TableCell>
                   <TableCell>{invoice.optional}</TableCell>
                 </TableRow>
               ))}

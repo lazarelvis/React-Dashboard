@@ -19,7 +19,6 @@ export default [
     createdAt: 1555016400000,
     status: 'pedding',
     barcode: uuid(),
-    barcode: uuid(),
     optional: ''
   }
 ];

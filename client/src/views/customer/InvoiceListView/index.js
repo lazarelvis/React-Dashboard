@@ -4,6 +4,7 @@ import Page from '../../../components/Page';
 import Results from './Results';
 import Toolbar from './Toolbar';
 import data from './data';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -15,9 +16,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const InvoiceListView = () => {
+  const userData = useSelector(state => state.auth);
   const classes = useStyles();
-  const [invoices] = useState(data);
-
+  const [invoices] = useState(userData.user.data);
+// console.log('userData',userData.user.data);
   return (
     <Page className={classes.root} title="Invoices">
       <Container maxWidth={false}>

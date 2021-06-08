@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
+import { Link } from 'react-router-dom';
 import {
   Box,
   Button,
@@ -31,9 +32,12 @@ const Toolbar = ({ className, ...rest }) => {
       <Box display="flex" justifyContent="flex-end">
         <Button className={classes.importButton}>Import</Button>
         <Button className={classes.exportButton}>Export</Button>
-        <Button color="primary" variant="contained">
-          Add Invoice
-        </Button>
+
+        <Link to={'/app/add_invoce'}>
+          <Button color="primary" variant="contained">
+            Add Invoice
+          </Button>
+        </Link>
       </Box>
       <Box mt={3}>
         <Card>

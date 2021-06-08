@@ -19,11 +19,29 @@ const initialState = {
   email: [],
   sendEmailSuccess: false,
   sendEmailFailure: false,
-  emailFailure: null
+  emailFailure: null,
+
+  invoiceUserData: [],
+  addInvoiceUserDataSuccess: false,
+  addInvoiceUserDataFailure: false,
+  invoiceUserDataFailure: null
 };
 // eslint-disable-next-line
 export default (state = initialState, action) => {
   switch (action.type) {
+    case t.ADD_INVOICE_USER_DATA_SUCCESS:
+      return Object.assign({}, state, {
+        invoiceUserData: action.data,
+        addInvoiceUserDataSuccess: true,
+        addInvoiceUserDataFailure: false
+      });
+    case t.ADD_INVOICE_USER_DATA_FAILURE:
+      return Object.assign({}, state, {
+        invoiceUserData: null,
+        addInvoiceUserDataSuccess: false,
+        addInvoiceUserDataFailure: true,
+        invoiceUserDataFailure: action.data
+      });
     case t.SET_AUTHENTICATION_SUCCESS:
       return Object.assign({}, state, {
         authentication: action.data,

@@ -26,3 +26,28 @@ export const registerUser = data => (dispatch, getState) => {
       dispatch(sendUserError(error));
     });
 };
+
+function setUserData(json) {
+  return {
+    type: t.ADD_INVOICE_USER_DATA_SUCCESS,
+    data: json
+  };
+}
+
+function setUserDataError(error) {
+  return {
+    type: t.ADD_INVOICE_USER_DATA_FAILURE,
+    error
+  };
+}
+
+export const addInvoiceUserData = (id, data) => (dispatch, getState) => {
+  return usersServiceApi
+    .patch(id, data)
+    .then(json => {
+      dispatch(setUserData(json));
+    })
+    .catch(error => {
+      dispatch(setUserDataError(error));
+    });
+};

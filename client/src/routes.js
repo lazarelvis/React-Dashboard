@@ -4,6 +4,7 @@ import DashboardLayout from './layouts/DashboardLayout';
 import MainLayout from './layouts/MainLayout';
 import AccountView from './views/account/AccountView';
 import InvoiceListView from './views/customer/InvoiceListView';
+import AddInvoice from './views/customer';
 import DashboardView from './views/reports/DashboardView';
 import LoginView from './views/auth/Login';
 import NotFoundView from './views/errors/NotFoundView';
@@ -23,6 +24,7 @@ const routes = isLoggedIn => [
       { path: 'dashboard', element: <Dashboard /> },
       { path: 'account', element: <AccountView /> },
       { path: 'invoices', element: <InvoiceListView /> },
+      { path: 'add_invoce', element: <AddInvoice /> },
       { path: 'dashboard', element: <DashboardView /> },
       { path: 'finance', element: <ProductListView /> },
       { path: 'budget-calculator', element: <BudgetCalcualtor /> },

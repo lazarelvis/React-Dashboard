@@ -192,6 +192,29 @@ export default (apiEndpoint, paginated = false) => {
   };
 
   /**
+   * Updates an existing resource with patch
+   *
+   * @param id
+   * @param payload
+   * @returns {Promise<unknown>}
+   */
+  const patch = (id, payload) => {
+    return new Promise((resolve, reject) => {
+      api({
+        method: 'PATCH',
+        url: `${apiEndpoint}/${id}`,
+        data: payload
+      })
+        .then(({ data }) => {
+          resolve(data);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  };
+
+  /**
    * Find resources
    *
    * @param params
@@ -219,6 +242,7 @@ export default (apiEndpoint, paginated = false) => {
     update,
     create,
     remove,
+    patch,
     find
   };
 };
