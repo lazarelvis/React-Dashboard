@@ -26,13 +26,20 @@ const useStyles = makeStyles(theme => ({
     width: 56
   },
   differenceValue: {
-    color: colors.green[500],
+    color: colors.red[500],
     marginRight: theme.spacing(1)
   }
 }));
 
-const TotalExpenses = () => {
+const TotalExpenses = ({ transactions }) => {
   const classes = useStyles();
+
+  const amounts = transactions.map(transaction => transaction.amount);
+
+  const expense = (
+    amounts.filter(item => item < 0).reduce((acc, item) => (acc += item), 0) *
+    -1
+  ).toFixed(2);
 
   return (
     <Card className={clsx(classes.root)}>
@@ -47,7 +54,7 @@ const TotalExpenses = () => {
               color="textPrimary"
               variant="h3"
             >
-              0 Lei
+              {expense} Lei
             </Typography>
           </Grid>
           <Grid item>

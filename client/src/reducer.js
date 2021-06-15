@@ -24,11 +24,65 @@ const initialState = {
   invoiceUserData: [],
   addInvoiceUserDataSuccess: false,
   addInvoiceUserDataFailure: false,
-  invoiceUserDataFailure: null
+  invoiceUserDataFailure: null,
+
+  addExpense: [],
+  addExpenseSuccess: false,
+  addExpenseFailure: false,
+  setExpenseFailure: null,
+
+  getExpense: [],
+  getExpenseSuccess: false,
+  getExpenseFailure: false,
+  setGetExpenseFailure: null,
+
+  deleteExpense: [],
+  deleteExpenseSuccess: false,
+  deleteExpenseFailure: false,
+  deleteSetExpenseFailure: null
 };
 // eslint-disable-next-line
 export default (state = initialState, action) => {
   switch (action.type) {
+    case t.DELETE_EXPENSE_TRANSACTION_SUCCESS:
+      return Object.assign({}, state, {
+        deleteExpense: action.data,
+        deleteExpenseSuccess: true,
+        deleteExpenseFailure: false
+      });
+    case t.DELETE_EXPENSE_TRANSACTION_FAILURE:
+      return Object.assign({}, state, {
+        deleteExpense: null,
+        deleteExpenseSuccess: false,
+        deleteExpenseFailure: true,
+        deleteSetExpenseFailure: action.data
+      });
+    case t.GET_EXPENSE_TRANSACTION_SUCCESS:
+      return Object.assign({}, state, {
+        getExpense: action.data,
+        getExpenseSuccess: true,
+        getExpenseFailure: false
+      });
+    case t.GET_EXPENSE_TRANSACTION_FAILURE:
+      return Object.assign({}, state, {
+        getExpense: null,
+        getExpenseSuccess: false,
+        getExpenseFailure: true,
+        setGetExpenseFailure: action.data
+      });
+    case t.ADD_EXPENSE_TRANSACTION_SUCCESS:
+      return Object.assign({}, state, {
+        addExpense: action.data,
+        addExpenseSuccess: true,
+        addExpenseFailure: false
+      });
+    case t.ADD_EXPENSE_TRANSACTION_FAILURE:
+      return Object.assign({}, state, {
+        addExpense: null,
+        addExpenseSuccess: false,
+        addExpenseFailure: true,
+        setExpenseFailure: action.data
+      });
     case t.ADD_INVOICE_USER_DATA_SUCCESS:
       return Object.assign({}, state, {
         invoiceUserData: action.data,

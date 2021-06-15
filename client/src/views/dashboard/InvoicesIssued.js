@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
     width: 56
   },
   differenceValue: {
-    color: colors.green[500],
+    color: colors.red[500],
     marginRight: theme.spacing(1)
   },
   differenceIcon: {
@@ -34,8 +34,12 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(1)
   }
 }));
-const InvoicesIssued = () => {
+const InvoicesIssued = ({ userData }) => {
   const classes = useStyles();
+
+  const transactions = userData.user.data;
+  const amount = transactions.map(transaction => transaction.amount);
+  const total = amount.reduce((acc, item) => (acc += item), 0).toFixed(2);
 
   return (
     <Card>
@@ -50,7 +54,7 @@ const InvoicesIssued = () => {
               color="textPrimary"
               variant="h3"
             >
-              0 Lei
+              {total} Lei
             </Typography>
           </Grid>
           <Grid item>

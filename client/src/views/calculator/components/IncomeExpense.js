@@ -1,18 +1,20 @@
-import React, { useContext } from "react";
-import { Context } from "./Context";
+import React, { useContext } from 'react';
+import { Context } from './Context';
+import { useSelector } from 'react-redux';
 
 export const IncomeExpenses = () => {
-  const { transactions } = useContext(Context);
+  // const { transactions } = useContext(Context);
+  const transactions = useSelector(state => state.getExpense);
 
-  const amounts = transactions.map((transaction) => transaction.amount);
+  const amounts = transactions.map(transaction => transaction.amount);
   const total = amounts.reduce((acc, item) => (acc += item), 0).toFixed(2);
   const income = amounts
-    .filter((item) => item > 0)
+    .filter(item => item > 0)
     .reduce((acc, item) => (acc += item), 0)
     .toFixed(2);
 
   const expense = (
-    amounts.filter((item) => item < 0).reduce((acc, item) => (acc += item), 0) *
+    amounts.filter(item => item < 0).reduce((acc, item) => (acc += item), 0) *
     -1
   ).toFixed(2);
 

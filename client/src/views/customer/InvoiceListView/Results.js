@@ -108,7 +108,7 @@ const Results = ({ className, invoices, ...rest }) => {
                 <TableCell>Optional</TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
+            <TableBody style={{ textTransform: 'capitalize' }}>
               {invoices.slice(0, limit).map(invoice => (
                 <TableRow
                   hover

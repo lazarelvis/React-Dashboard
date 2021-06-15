@@ -6,8 +6,8 @@ import Page from '../../components/Page';
 import { Header } from './components/Header';
 import { Balance } from './components/Balance';
 import { IncomeExpenses } from './components/IncomeExpense';
-import { TransactionList } from './components/TransactionList';
-import { AddTransaction } from './components/AddTransaction';
+import TransactionList from './components/TransactionList';
+import AddTransaction from './components/AddTransaction';
 import { ContextProvider } from './components/Context';
 
 import './css/style.css';

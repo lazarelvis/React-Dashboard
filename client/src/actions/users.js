@@ -15,7 +15,7 @@ function sendUserError(error) {
     error
   };
 }
-
+//create a new user
 export const registerUser = data => (dispatch, getState) => {
   return usersServiceApi
     .create(data)
@@ -40,7 +40,7 @@ function setUserDataError(error) {
     error
   };
 }
-
+//add new invoice to user data
 export const addInvoiceUserData = (id, data) => (dispatch, getState) => {
   return usersServiceApi
     .patch(id, data)

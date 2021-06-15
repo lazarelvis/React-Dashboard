@@ -79,6 +79,7 @@ const AddInvoice = ({ addInvoiceUserData }) => {
               obj.data = arr;
 
               arr.push(value);
+              console.log('obj:', obj);
               addInvoiceUserData(id, obj);
               resetForm({});
               // navigate('/app/dashboard', { replace: true });

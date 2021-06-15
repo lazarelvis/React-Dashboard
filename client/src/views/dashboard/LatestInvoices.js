@@ -20,6 +20,7 @@ import {
   Tooltip,
   makeStyles
 } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 
 const data = [
@@ -62,9 +63,10 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const LatestInvoices = ({ className, ...rest }) => {
+const LatestInvoices = ({ className, userData, ...rest }) => {
+  console.log('rest:');
   const classes = useStyles();
-  const [orders] = useState(data);
+  const [orders] = useState(userData.user.data);
 
   return (
     <Card className={clsx(classes.root, className)} {...rest}>
@@ -88,10 +90,14 @@ const LatestInvoices = ({ className, ...rest }) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {orders.map(order => (
+              {orders.slice(0, 3).map(order => (
                 <TableRow hover key={order.id}>
-                  <TableCell>{order.ref}</TableCell>
-                  <TableCell>{order.customer.name}</TableCell>
+                  <TableCell>
+                    {order.clientCode ? order.clientCode : '-'}
+                  </TableCell>
+                  <TableCell style={{ textTransform: 'capitalize' }}>
+                    {order.name}
+                  </TableCell>
                   <TableCell>
                     {moment(order.createdAt).format('DD/MM/YYYY')}
                   </TableCell>
@@ -105,14 +111,16 @@ const LatestInvoices = ({ className, ...rest }) => {
         </Box>
       </PerfectScrollbar>
       <Box display="flex" justifyContent="flex-end" p={2}>
-        <Button
-          color="primary"
-          endIcon={<ArrowRightIcon />}
-          size="small"
-          variant="text"
-        >
-          View all
-        </Button>
+        <Link to="/app/invoices">
+          <Button
+            color="primary"
+            endIcon={<ArrowRightIcon />}
+            size="small"
+            variant="text"
+          >
+            View all
+          </Button>
+        </Link>
       </Box>
     </Card>
   );
