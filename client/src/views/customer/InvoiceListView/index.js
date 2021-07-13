@@ -19,13 +19,13 @@ const InvoiceListView = () => {
   const userData = useSelector(state => state.auth);
   const classes = useStyles();
   const [invoices] = useState(userData.user.data);
-// console.log('userData',userData.user.data);
+  // console.log('userData',userData.user.data);
   return (
     <Page className={classes.root} title="Invoices">
       <Container maxWidth={false}>
         <Toolbar />
         <Box mt={3}>
-          <Results invoices={invoices} />
+          <Results invoices={invoices} userData={userData} />
         </Box>
       </Container>
     </Page>

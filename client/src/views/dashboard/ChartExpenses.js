@@ -23,10 +23,10 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const ChartExpenses = ({ className, ...rest }) => {
+const ChartExpenses = ({ className, transactions, userData, ...rest }) => {
   const classes = useStyles();
   const theme = useTheme();
-
+  console.log('transactions in chart exp: ', transactions);
   const data = {
     datasets: [
       {
@@ -66,20 +66,77 @@ const ChartExpenses = ({ className, ...rest }) => {
     }
   };
 
+  const items = transactions.filter(tran => tran.category == 'Living & Energy');
+  const itemsHolidaysAndTravel = transactions.filter(
+    tran => tran.category == 'Holidays & Travel'
+  );
+  const itemsFoodAndDining = transactions.filter(
+    tran => tran.category == 'Food & Dining'
+  );
+
+  const amountExpense = transactions.map(transaction => transaction.amount);
+
+  const totalExpense = (
+    amountExpense
+      .filter(item => item < 0)
+      .reduce((acc, item) => (acc += item), 0) * -1
+  ).toFixed(2);
+
+  const amountFoodAndDining = itemsFoodAndDining.map(
+    transaction => transaction.amount
+  );
+  const amountHolidaysAndTravel = itemsHolidaysAndTravel.map(
+    transaction => transaction.amount
+  );
+  const totalHolidaysAndTravel = amountHolidaysAndTravel
+    .reduce((acc, item) => (acc += item), 0)
+    .toFixed(2);
+
+  const totalFoodAndDining = amountFoodAndDining
+    .reduce((acc, item) => (acc += item), 0)
+    .toFixed(2);
+
+  const amountLivingAndEnergy = items.map(transaction => transaction.amount);
+  const totalLivingAndEnergy = amountLivingAndEnergy
+    .reduce((acc, item) => (acc += item), 0)
+    .toFixed(2);
+
+  const amount = transactions.map(transaction => transaction.amount);
+  const total = amount.reduce((acc, item) => (acc += item), 0).toFixed(2);
+
+  const transactionsInvoice = userData.user.data;
+
+  console.log('total items totalHolidaysAndTravel:', totalHolidaysAndTravel);
+  console.log('total items totalExpense:', totalExpense);
+  console.log('total items:', total);
+  const percentLivingFromTotal = (
+    (totalLivingAndEnergy / totalExpense) *
+    100
+  ).toFixed(2);
+  const percentHolidaysAndTravel = (
+    (totalHolidaysAndTravel / totalExpense) *
+    100
+  ).toFixed(2);
+
+  const percentFoodAndDining = (
+    (totalFoodAndDining / totalExpense) *
+    100
+  ).toFixed(2);
+
   const devices = [
     {
-      title: 'Invoices',
-      value: 50,
+      title: 'Holidays & Travel ',
+      value: Math.abs(percentHolidaysAndTravel),
       color: colors.indigo[500]
     },
     {
-      title: 'Holidays',
-      value: 30,
+      title: 'Living & Energy',
+      value: Math.abs(percentLivingFromTotal),
       color: colors.red[600]
     },
     {
-      title: 'Other',
-      value: 20,
+      title: 'Food & Dining',
+      value: Math.abs(percentFoodAndDining),
       color: colors.orange[600]
     }
   ];

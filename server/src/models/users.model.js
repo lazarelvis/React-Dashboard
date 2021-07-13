@@ -13,6 +13,7 @@ module.exports = function (app) {
       password: { type: String },
       avatar: { type: String },
       data: { type: Array, default: [] },
+      history: { type: Array, default: [] },
     },
     {
       timestamps: true,

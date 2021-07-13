@@ -33,6 +33,10 @@ const useStyles = makeStyles(theme => ({
   differencePercent: {
     color: colors.red[900],
     marginRight: theme.spacing(1)
+  },
+  colorTotalBalance: {
+    color: colors.red[500],
+    marginRight: theme.spacing(1)
   }
 }));
 const Budget = ({ transactions }) => {
@@ -51,7 +55,7 @@ const Budget = ({ transactions }) => {
             </Typography>
             <Typography
               className={
-                total < 0 ? classes.differenceIcon : classes.differenceValue
+                total < 0 ? classes.colorTotalBalance : classes.differenceValue
               }
               color="textPrimary"
               variant="h3"

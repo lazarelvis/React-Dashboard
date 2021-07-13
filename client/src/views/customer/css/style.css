@@ -1,0 +1,40 @@
+@font-face {
+  src: url(./fonts/PayPalSansBig-Regular.ttf);
+  font-family: 'PayPal Sans Big';
+}
+
+.modal-invoice {
+  position: absolute;
+  width: 700px;
+  height: 700px;
+  background-color: white;
+  left: 38%;
+  border: 1px solid #546e7a;
+  border-radius: 10px;
+  top: 200px;
+}
+.modal-title {
+  padding: 1.5rem;
+  text-align: center;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  font-weight: 100;
+}
+
+.modal-body {
+  padding: 0 1.5rem 1.5rem;
+}
+.modal-content {
+  padding: 15px;
+}
+
+.modal-label {
+  color: #6e6e6e;
+}
+
+.modal-box {
+  margin-bottom: 1rem;
+}
+
+.modal-box {
+  font-size: 20px;
+}

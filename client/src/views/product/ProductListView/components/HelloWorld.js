@@ -5,19 +5,6 @@ import { BiBarcodeReader } from 'react-icons/bi';
 
 import BarcodeScanner from './BarcodeScanner';
 
-// const useStyles = makeStyles(theme => ({
-//   barcodeIcon: {
-//     width: '100%',
-//     fontSize: '200px',
-//     color: colors.indigo[500],
-//     backgroundColor: colors.white
-//   },
-//   btnBarcode: {
-//     display: 'flex',
-//     margin: 'auto'
-//   }
-// }));
-
 class HelloWorld extends React.Component {
   constructor(props) {
     super(props);
@@ -50,21 +37,12 @@ class HelloWorld extends React.Component {
       <div>
         {!this.state.bShowScanner ? (
           <div>
-            {/* Choose image(s) to decode:
-                        <input onChange={this.onIptChange} type="file" multiple accept="image/png,image/jpeg,image/bmp,image/gif" />
-                        <br/><br/> */}
             <div className="scan-btn">
-              {/* <Button onClick={this.showScanner}>
-                <BiBarcodeReader style={{ fontSize: '60px' }} />
-                Click to scan
-              </Button> */}
               <Button onClick={this.sendEmail}>
                 <BiBarcodeReader style={{ fontSize: '60px' }} />
                 Click to scan
               </Button>
             </div>
-
-            {/* <button onClick={this.showScanner}>show scanner</button> */}
           </div>
         ) : (
           <div>

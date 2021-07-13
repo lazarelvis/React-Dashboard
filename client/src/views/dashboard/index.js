@@ -49,7 +49,7 @@ const Dashboard = ({ getExpenseData, getExpense }) => {
             <ChartBuget />
           </Grid>
           <Grid item lg={4} md={6} xl={3} xs={12}>
-            <ChartExpenses />
+            <ChartExpenses transactions={getExpense} userData={userData} />
           </Grid>
           {/* <Grid item lg={4} md={6} xl={3} xs={12}></Grid> */}
           <Grid item lg={12} md={12} xl={12} xs={12}>

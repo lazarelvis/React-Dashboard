@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 const Transaction = ({ transaction, removeExpense }) => {
   // const { deleteTransaction } = useContext(Context);
-  console.log(transaction._id);
+  // console.log(transaction._id);
   const sign = transaction.amount < 0 ? '-' : '+';
   return (
     <li className={transaction.amount > 0 ? 'plus' : 'minus'}>
